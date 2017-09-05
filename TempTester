@@ -1,0 +1,45 @@
+package tests;
+
+/**
+ * A unit test for two static methods that convert Celcius and Fahrenheit 
+ * temperatures. Note: all returns are rounded to one decimal place.
+ * 
+ * What's a program without a few tests
+ */
+
+import static org.junit.Assert.*;
+import model.TemperatureConverter;
+
+import org.junit.Test;
+
+public class TemperatureConverterTests {
+
+	@Test
+	public void testF2C() {
+		assertEquals(100.0, TemperatureConverter.F2C(212.0), 0.1);
+		assertEquals(0.0, TemperatureConverter.F2C(32.0), 0.1);
+		assertEquals(37.0, TemperatureConverter.F2C(98.6), 0.1);
+	}
+
+	@Test
+	public void testF2CWhenNegativeOr0() {
+		assertEquals(-8.89, TemperatureConverter.F2C(16.0), 0.1);
+		assertEquals(-40.0, TemperatureConverter.F2C(-40.0), 0.1);
+		assertEquals(-17.8, TemperatureConverter.F2C(0.0), 0.1);
+	}
+
+	@Test
+	public void testC2F() {
+		assertEquals(212.0, TemperatureConverter.C2F(100.0), 0.1);
+		assertEquals(98.6, TemperatureConverter.C2F(37.0), 0.1);
+		assertEquals(32.0, TemperatureConverter.C2F(0.0), 0.1);
+	}
+
+	@Test
+	public void testC2FWhenNegativeOr0() {
+		assertEquals(-40.0, TemperatureConverter.C2F(-40.0), 0.1);
+		assertEquals(30.2, TemperatureConverter.C2F(-1.0), 0.1);
+		assertEquals(32.0, TemperatureConverter.C2F(0.0), 0.1);
+	}
+
+}
