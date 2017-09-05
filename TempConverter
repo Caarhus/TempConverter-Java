@@ -7,7 +7,7 @@ package model;
  * The package 'model' is because it's under a model folder
  */
 
-public class TemperatureConverter {
+public class TempConverter {
 
 	// Return the Celsius equivalent of Fahrenheit
 	public static double F2C(double f) {
