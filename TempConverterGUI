@@ -1,0 +1,96 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import model.TempConverter;
+
+/**
+ * A event driven program with a graphical user interface that uses class
+ * TempConverter to convert F to C and C to F.
+ */
+
+public class TempConverterGUI extends JFrame {
+
+	public static void main(String[] args) {
+		new TempConverterGUI().setVisible(true);
+	}
+
+	public TempConverterGUI() {
+		// This is a composed method
+		layoutTheGUI();
+		registerListeners();
+	}
+
+	private JTextField degreesCField;
+	private JTextField degreesFField;
+	private JButton convertC2F;
+	private JButton convertF2C;
+	private JPanel topPanel;
+
+	private void layoutTheGUI() {
+		setTitle("Temperature Converter");
+		setSize(300, 110);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // shuts off the thread
+														// when the frame closes
+		topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout());
+
+		// Celsius
+		topPanel.add(new JLabel("Celsius:"));
+		degreesCField = new JTextField(10);
+		topPanel.add(degreesCField);
+		convertC2F = new JButton("Convert");
+		topPanel.add(convertC2F);
+
+		// Fahrenheit
+		topPanel.add(new JLabel("Fahrenheit:"));
+		degreesFField = new JTextField(10);
+		topPanel.add(degreesFField);
+		convertF2C = new JButton("Convert");
+		topPanel.add(convertF2C);
+
+		Container contentPane = this.getContentPane();
+		contentPane.add(topPanel, BorderLayout.CENTER);
+	}
+
+	private void registerListeners() {
+		convertC2F.addActionListener(new makeFahrenheit());
+		convertF2C.addActionListener(new makeCelsius());
+	}
+
+	private class makeFahrenheit implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			try {
+				String input = degreesCField.getText();
+				double celsius = Double.parseDouble(input);
+				double fahr = TempConverter.C2F(celsius);
+				degreesFField.setText(String.format("%.2f", fahr));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	} // end class makeCelsius
+
+	private class makeCelsius implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			try {
+				String input = degreesFField.getText();
+				double fahr = Double.parseDouble(input);
+				double celsius = TempConverter.F2C(fahr);
+				degreesCField.setText(String.format("%.2c", celsius));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	} // end class makeFahrenheit
+}
