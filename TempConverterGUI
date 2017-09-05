@@ -41,7 +41,7 @@ public class TempConverterGUI extends JFrame {
 		setTitle("Temperature Converter");
 		setSize(300, 110);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // shuts off the thread
-														// when the frame closes
+								// when the frame closes
 		topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout());
 
